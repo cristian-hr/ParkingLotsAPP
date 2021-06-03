@@ -5,5 +5,5 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 var _app = _interopRequireDefault(require("./app"));
 
 _app["default"].listen(process.env.PORT || 3001, function () {
-  console.log("%s listening at ".concat(process.env.PORT || 3001)); // eslint-disable-line no-console
+  console.log("API listening at ".concat(process.env.PORT || 3001)); // eslint-disable-line no-console
 });
