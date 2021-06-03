@@ -1,0 +1,27 @@
+.contDivSB {
+    padding-top: 20px;
+    padding-bottom: 15px;
+}
+
+.inputSB {
+    font-size: 15px;
+    width: 400px;
+    height: 25px;
+    border: none;
+    border-radius: 15px;
+    padding-left: 15px;
+}
+.inputSB:focus {
+    outline: none;
+}
+
+.submitSB {
+    cursor: pointer;
+    border: none;
+    color: rgb(109, 109, 109);
+    font-size: 15px;
+    background: none;
+    position: absolute;
+    margin-left: -68px;
+    margin-top: 4px;
+}

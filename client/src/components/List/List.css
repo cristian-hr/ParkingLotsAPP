@@ -1,0 +1,39 @@
+.parkImgList {
+    width: 220px;
+    height: 180px;
+    object-fit:cover;
+    border-radius: 0 15px 15px 0;
+}
+
+.parkDivImgList { 
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    vertical-align: middle;
+    justify-content: center;
+    align-items: flex-end;
+    width: 200px;
+}
+
+.divParkList {
+    cursor: pointer;
+    color: white;
+    display: flex;
+    font-size: 27px;
+    justify-content: space-between;
+    background-color: #fa824c;
+    margin: 20px auto;
+    width: 700px;
+    height: 180px;
+    border-radius: 15px;    
+    vertical-align: middle;
+}
+
+.divParkDataList {
+    display: flex;
+    flex-direction: column;
+    text-align:left;
+    width: 60%;
+    margin-left: 30px;
+    padding-top: 20px;
+}
