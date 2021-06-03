@@ -13,12 +13,12 @@ function Main () {
 
     useEffect(() => {
         if (lsPage) setPage(+lsPage)
-    },[])
+    },[lsPage])
 
     return (
         <div>
             <div className="divTitleMain">
-                <span className="titleMain">Parking location searcher</span>
+                <span className="titleMain">Parking slot searcher</span>
             </div>
             <SearchBar results={results} setResults={setResults} page={page}/>
             <List results={results} page={page} />
