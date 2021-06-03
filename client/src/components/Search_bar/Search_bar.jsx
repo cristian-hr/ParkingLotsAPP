@@ -5,37 +5,36 @@ import "./Search_bar.css"
 function SearchBar(props) {
 
     const { REACT_APP_API_URL } = process.env
-    const results = props.results
+    const lsSeach = localStorage.getItem("parkingSearch")
 
     const [search, setSearch] = useState("")
 
-    const lsSeach = localStorage.getItem("parkingSearch")
-    const lsPage = localStorage.getItem("parkingPage")
-
     useEffect(() => {
-        if (props.page > 1 && !results.find(r => r.page === props.page)) {
-            function pageResult() {
-                axios.get(`${REACT_APP_API_URL}/${search}/${props.page}`)
-                    .then(res => {
-                        props.setResults([...results, { page: props.page, data: res.data.businesses }])
-                    })
-                    .catch(err => console.log(err))
-            }
-            pageResult()
-        }
-        else if (lsSeach && !results.find(r => r.page === props.page)) {
+        if (lsSeach && !props.results.find(r => r.page === props.page)) {
             setSearch(lsSeach)
-            function lsResult() {
-                axios.get(`${REACT_APP_API_URL}/${lsSeach}/${lsPage > 1 ? lsPage : props.page}`)
-                    .then(res => {
-                        props.setResults([...results, { page: lsPage > 1 ? +lsPage : props.page, data: res.data.businesses }])
-                    })
-                    .catch(err => console.log(err))
-            }
-            lsResult()
+            apiNextSearch()
         }
     // eslint-disable-next-line
-    }, [props.page, lsSeach])
+    }, [props.page])
+
+    function apiNextSearch() {
+        axios.get(`${REACT_APP_API_URL}/${lsSeach}/${props.page}`)
+            .then(res => {
+
+                if (props.results.find(r => r.total)) {
+                    props.setResults([...props.results,
+                    { page: props.page, search: lsSeach, data: res.data.businesses }
+                    ])
+                }
+                else {
+                    props.setResults([...props.results,
+                    { total: res.data.total },
+                    { page: props.page, search: lsSeach, data: res.data.businesses }
+                    ])
+                }
+            })
+            .catch(err => console.log(err))
+    }
 
     function handleInputChange(event) {
         event.preventDefault()
@@ -46,15 +45,16 @@ function SearchBar(props) {
         event.preventDefault()
         localStorage.setItem("parkingSearch", search)
         localStorage.setItem("parkingPage", "1")
+        props.setPage(1)
+        props.setResults([])
 
-        if (!search) props.setResults([{ page: 1, data: [] }])
-
-        else axios.get(`${REACT_APP_API_URL}/${search}/${props.page}`)
-            .then(res => {
-                console.log(res.data.businesses)
-                props.setResults([{ page: props.page, data: res.data.businesses }])
-            })
-            .catch(err => console.log(err))
+        if (search) {
+            axios.get(`${REACT_APP_API_URL}/${search}/${1}`)
+                .then(res => {
+                    props.setResults([{ total: res.data.total }, { page: 1, search: search, data: res.data.businesses }])
+                })
+                .catch(err => console.log(err))
+        }
     }
 
     return (

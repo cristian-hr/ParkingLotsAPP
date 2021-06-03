@@ -9,7 +9,11 @@ function List(props) {
     return (
         <div>
             {props.results.find(r => r.page === props.page) &&
-                <div className="cardDetailsList">Click the card to get more details</div>}
+                <div className="divCardDetailsList">
+                    <span className="cardDetailsList">Click the card to get more details</span> 
+                    <span className="cardDetailsList">Total results: {props.results.find(r=>r.total)?.total}</span>
+                </div>                
+            }
             {props.results.find(r => r.page === props.page)?.data.map((result, index) =>
                 <div key={index} className="divParkList" onClick={() => goToDetails(result.url)}>
                     <div className="divParkDataList">
