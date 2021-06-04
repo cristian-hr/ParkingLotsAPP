@@ -1,6 +1,7 @@
 # ParkingLotsAPP
 
 Link to the app https://parking-lots-app.vercel.app/
+
 (the first search might be a little slow)
 
 ## To run the project
