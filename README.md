@@ -22,7 +22,7 @@ npm start
 ```
 
 ### Then 
-Go to client dir and and run the next commands:
+Go to client dir and run the next commands:
 ```
 npm install
 npm start
